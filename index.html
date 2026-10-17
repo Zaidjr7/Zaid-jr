@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <title>Zaid Jr</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #050505;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .page {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background photo */
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+    }
+
+    .background img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.42) saturate(0.7);
+    }
+
+    .background::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0,0,0,0.25),
+          rgba(0,0,0,0.65) 50%,
+          #050505 95%
+        );
+    }
+
+    .container {
+      width: min(92%, 500px);
+      margin: auto;
+      padding: 70px 0 30px;
+    }
+
+    /* Profile */
+    .profile {
+      text-align: center;
+    }
+
+    .avatar {
+      width: 82px;
+      height: 82px;
+      margin: auto;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.25);
+
+      font-size: 25px;
+      font-weight: bold;
+
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      margin-top: 16px;
+      font-size: 34px;
+      letter-spacing: -1px;
+    }
+
+    .username {
+      color: #aaa;
+      margin-top: 6px;
+      font-size: 14px;
+    }
+
+    .bio {
+      margin-top: 15px;
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    /* Social buttons */
+    .links {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 17px 20px;
+
+      text-decoration: none;
+      color: white;
+
+      background: rgba(15,15,15,0.72);
+      border: 1px solid rgba(255,255,255,0.13);
+
+      border-radius: 17px;
+
+      backdrop-filter: blur(15px);
+
+      transition: 0.25s;
+    }
+
+    .link:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    .link-left {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .icon {
+      font-size: 22px;
+    }
+
+    .link-title {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .arrow {
+      color: #888;
+      font-size: 18px;
+    }
+
+    /* Contact */
+    .contact {
+      margin-top: 60px;
+
+      padding: 25px;
+
+      background: rgba(10,10,10,0.78);
+      border: 1px solid rgba(255,255,255,0.13);
+
+      border-radius: 24px;
+
+      backdrop-filter: blur(18px);
+    }
+
+    .contact-small {
+      color: #888;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .contact h2 {
+      margin-top: 7px;
+      font-size: 27px;
+    }
+
+    .contact-description {
+      color: #999;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    form {
+      margin-top: 23px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      color: #ccc;
+      font-size: 13px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+
+      margin-top: 7px;
+
+      padding: 14px;
+
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 13px;
+
+      outline: none;
+
+      background: rgba(255,255,255,0.045);
+      color: white;
+
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #666;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    button {
+      border: none;
+
+      padding: 15px;
+
+      border-radius: 13px;
+
+      background: white;
+      color: black;
+
+      font-size: 14px;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      color: #555;
+      font-size: 11px;
+      margin-top: 35px;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding-top: 50px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- Your uploaded photo -->
+    <div class="background">
+      <img src="hero.jpg" alt="Zaid Jr">
+    </div>
+
+    <div class="container">
+
+      <!-- PROFILE -->
+      <section class="profile">
+
+        <div class="avatar">
+          ZJ
+        </div>
+
+        <h1>Zaid Jr</h1>
+
+        <p class="username">
+          @syed.5.7
+        </p>
+
+        <p class="bio">
+          Welcome to my corner of the internet.
+        </p>
+
+      </section>
+
+
+      <!-- SOCIAL LINKS -->
+      <section class="links">
+
+        <a
+          class="link"
+          href="https://www.instagram.com/syed.5.7?exln=MTM0YTM0d3NyMzZkaA%3D%3D"
+          target="_blank"
+        >
+
+          <div class="link-left">
+            <span class="icon">◎</span>
+
+            <span class="link-title">
+              Instagram
+            </span>
+          </div>
+
+          <span class="arrow">
+            ↗
+          </span>
+
+        </a>
+
+
+        <a
+          class="link"
+          href="https://www.snapchat.com/add/sy3d_zaid?share_id=HTM9MwyW8WU&locale=en-IN"
+          target="_blank"
+        >
+
+          <div class="link-left">
+            <span class="icon">👻</span>
+
+            <span class="link-title">
+              Snapchat
+            </span>
+          </div>
+
+          <span class="arrow">
+            ↗
+          </span>
+
+        </a>
+
+      </section>
+
+
+      <!-- CONTACT FORM -->
+      <section class="contact">
+
+        <span class="contact-small">
+          GET IN TOUCH
+        </span>
+
+        <h2>
+          Send me a message
+        </h2>
+
+        <p class="contact-description">
+          Enter your name and email, then send me your message.
+        </p>
+
+
+        <!--
+          IMPORTANT:
+          Replace YOUR_FORMSPREE_ENDPOINT with your
+          Formspree endpoint.
+        -->
+
+        <form
+          action="YOUR_FORMSPREE_ENDPOINT"
+          method="POST"
+        >
+
+          <label>
+            Name
+
+            <input
+              type="text"
+              name="name"
+              placeholder="Your name"
+              required
+            >
+
+          </label>
+
+
+          <label>
+            Email
+
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+            >
+
+          </label>
+
+
+          <label>
+            Message
+
+            <textarea
+              name="message"
+              placeholder="Write your message..."
+              required
+            ></textarea>
+
+          </label>
+
+
+          <button type="submit">
+            Send Message →
+          </button>
+
+        </form>
+
+      </section>
+
+
+      <footer>
+        © 2026 Zaid Jr
+      </footer>
+
+    </div>
+  </div>
+
+</body>
+</html>
