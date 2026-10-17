@@ -158,33 +158,34 @@ body{
 /* profile */
 
 .profile-image{
-   .profile-image{
     width:105px;
     height:105px;
+
     margin:auto;
 
     border-radius:50%;
-    overflow:hidden;
 
-    border:1px solid rgba(255,255,255,.35);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:30px;
+    font-weight:bold;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.18),
+        rgba(255,255,255,.03)
+    );
+
+    border:1px solid rgba(255,255,255,.25);
 
     box-shadow:
-    0 0 40px rgba(255,255,255,.08);
+    0 0 50px rgba(255,255,255,.06);
 
     backdrop-filter:blur(15px);
 }
-
-.profile-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    object-position:center;
-    
-    display:block;
-}
-   
 
 
 .hero h1{
@@ -697,7 +698,7 @@ footer{
 
 
 <div class="profile-image">
-    <img src="hero.jpg" alt="Zaid Jr">
+    ZJ
 </div>
 
 
