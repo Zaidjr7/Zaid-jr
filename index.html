@@ -1,439 +1,1031 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050505">
-  <title>Zaid Jr</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<title>Zaid Jr — Personal Space</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050505;
+    color:#fff;
+    font-family:Arial, Helvetica, sans-serif;
+    overflow-x:hidden;
+}
+
+
+/* ================= BACKGROUND ================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-5;
+}
+
+.background img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:brightness(.32) contrast(1.05) saturate(.65);
+}
+
+.background::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(circle at 50% 20%,
+    rgba(255,255,255,.08),
+    transparent 35%),
+
+    linear-gradient(
+        to bottom,
+        rgba(0,0,0,.25),
+        #050505 85%
+    );
+}
+
+
+/* ================= GLOW ================= */
+
+.glow{
+    position:fixed;
+    width:400px;
+    height:400px;
+
+    background:rgba(255,255,255,.035);
+
+    filter:blur(100px);
+    border-radius:50%;
+
+    top:20%;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    pointer-events:none;
+    z-index:-2;
+}
+
+
+/* ================= PARTICLES ================= */
+
+.particles{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+}
+
+.particles span{
+    position:absolute;
+
+    width:3px;
+    height:3px;
+
+    background:white;
+
+    border-radius:50%;
+
+    opacity:.25;
+
+    animation:float 8s infinite ease-in-out;
+}
+
+.particles span:nth-child(1){left:10%;top:20%;}
+.particles span:nth-child(2){left:25%;top:65%;animation-delay:2s;}
+.particles span:nth-child(3){left:45%;top:30%;animation-delay:4s;}
+.particles span:nth-child(4){left:70%;top:70%;animation-delay:1s;}
+.particles span:nth-child(5){left:90%;top:35%;animation-delay:3s;}
+.particles span:nth-child(6){left:60%;top:10%;animation-delay:5s;}
+.particles span:nth-child(7){left:35%;top:85%;animation-delay:2s;}
+
+@keyframes float{
+
+    0%,100%{
+        transform:translateY(0);
+        opacity:.15;
     }
 
-    body {
-      min-height: 100vh;
-      background: #050505;
-      color: white;
-      font-family: Arial, sans-serif;
+    50%{
+        transform:translateY(-35px);
+        opacity:.5;
+    }
+}
+
+
+/* ================= MAIN ================= */
+
+.container{
+    width:min(92%,560px);
+    margin:auto;
+}
+
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:70px 0;
+}
+
+.hero-content{
+    width:100%;
+}
+
+
+/* profile */
+
+.profile-image{
+    width:105px;
+    height:105px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:30px;
+    font-weight:bold;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.18),
+        rgba(255,255,255,.03)
+    );
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:
+    0 0 50px rgba(255,255,255,.06);
+
+    backdrop-filter:blur(15px);
+}
+
+
+.hero h1{
+    margin-top:25px;
+
+    font-size:clamp(42px,12vw,70px);
+
+    letter-spacing:-3px;
+
+    font-weight:800;
+
+    background:
+    linear-gradient(
+        120deg,
+        #fff,
+        #999,
+        #fff
+    );
+
+    background-size:200%;
+
+    -webkit-background-clip:text;
+    color:transparent;
+
+    animation:shine 5s infinite linear;
+}
+
+@keyframes shine{
+
+    0%{
+        background-position:0%;
     }
 
-    .page {
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
+    100%{
+        background-position:200%;
+    }
+}
+
+
+.username{
+    margin-top:8px;
+
+    color:#888;
+
+    font-size:14px;
+}
+
+
+.tagline{
+    margin:25px auto 0;
+
+    max-width:420px;
+
+    color:#bbb;
+
+    line-height:1.7;
+
+    font-size:15px;
+}
+
+
+/* ================= BUTTONS ================= */
+
+.buttons{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:13px;
+
+    margin-top:35px;
+}
+
+
+.button{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:18px 20px;
+
+    color:white;
+
+    text-decoration:none;
+
+    background:
+    rgba(15,15,15,.62);
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+    border-radius:17px;
+
+    backdrop-filter:blur(18px);
+
+    transition:.25s;
+
+}
+
+
+.button:hover{
+
+    transform:translateY(-4px);
+
+    background:
+    rgba(255,255,255,.08);
+
+    border-color:
+    rgba(255,255,255,.25);
+
+}
+
+
+.button-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+}
+
+
+.button-icon{
+
+    width:35px;
+    height:35px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:rgba(255,255,255,.08);
+
+    font-size:18px;
+}
+
+
+.button-name{
+    font-size:14px;
+    font-weight:bold;
+}
+
+
+.button-arrow{
+    color:#777;
+}
+
+
+/* ================= SCROLL ================= */
+
+.scroll{
+
+    margin-top:55px;
+
+    color:#666;
+
+    font-size:11px;
+
+    letter-spacing:3px;
+
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+
+    50%{
+        transform:translateY(8px);
+    }
+}
+
+
+/* ================= SECTIONS ================= */
+
+section.info{
+
+    padding:90px 0;
+}
+
+
+.section-label{
+
+    color:#666;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+}
+
+
+.section-title{
+
+    margin-top:10px;
+
+    font-size:35px;
+
+    letter-spacing:-1.5px;
+}
+
+
+.section-text{
+
+    margin-top:15px;
+
+    color:#999;
+
+    line-height:1.8;
+
+    font-size:14px;
+}
+
+
+/* ================= ABOUT CARD ================= */
+
+.about-card{
+
+    margin-top:28px;
+
+    padding:25px;
+
+    border-radius:22px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.08),
+        rgba(255,255,255,.025)
+    );
+
+    border:1px solid rgba(255,255,255,.11);
+
+    backdrop-filter:blur(20px);
+
+    line-height:1.8;
+
+    color:#aaa;
+
+    font-size:14px;
+}
+
+
+.about-card strong{
+    color:white;
+}
+
+
+/* ================= INTERESTS ================= */
+
+.interests{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:12px;
+
+    margin-top:25px;
+}
+
+
+.interest{
+
+    padding:22px 16px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.045);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.25s;
+}
+
+
+.interest:hover{
+
+    transform:translateY(-4px);
+
+    background:
+    rgba(255,255,255,.08);
+}
+
+
+.interest-icon{
+
+    font-size:25px;
+
+    margin-bottom:12px;
+}
+
+
+.interest h3{
+
+    font-size:14px;
+}
+
+
+.interest p{
+
+    color:#777;
+
+    font-size:11px;
+
+    margin-top:6px;
+}
+
+
+/* ================= CONTACT ================= */
+
+.contact{
+
+    margin-top:25px;
+
+    padding:25px;
+
+    border-radius:24px;
+
+    background:
+    rgba(10,10,10,.72);
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(20px);
+}
+
+
+.contact-description{
+
+    color:#777;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+    margin-top:10px;
+}
+
+
+form{
+
+    margin-top:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+}
+
+
+label{
+
+    font-size:12px;
+
+    color:#aaa;
+}
+
+
+input,
+textarea{
+
+    width:100%;
+
+    margin-top:7px;
+
+    padding:14px;
+
+    border-radius:13px;
+
+    outline:none;
+
+    border:
+    1px solid rgba(255,255,255,.1);
+
+    background:
+    rgba(255,255,255,.035);
+
+    color:white;
+
+    font-family:Arial;
+
+}
+
+
+input:focus,
+textarea:focus{
+
+    border-color:
+    rgba(255,255,255,.35);
+}
+
+
+textarea{
+
+    min-height:130px;
+
+    resize:vertical;
+}
+
+
+.send{
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:13px;
+
+    background:white;
+
+    color:black;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+
+.send:hover{
+
+    transform:translateY(-2px);
+
+    opacity:.9;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer{
+
+    padding:50px 0 30px;
+
+    text-align:center;
+
+    color:#444;
+
+    font-size:11px;
+
+}
+
+
+@media(max-width:400px){
+
+    .interests{
+        grid-template-columns:1fr;
     }
 
-    /* Background photo */
-    .background {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-    }
+}
 
-    .background img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.42) saturate(0.7);
-    }
-
-    .background::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(
-          to bottom,
-          rgba(0,0,0,0.25),
-          rgba(0,0,0,0.65) 50%,
-          #050505 95%
-        );
-    }
-
-    .container {
-      width: min(92%, 500px);
-      margin: auto;
-      padding: 70px 0 30px;
-    }
-
-    /* Profile */
-    .profile {
-      text-align: center;
-    }
-
-    .avatar {
-      width: 82px;
-      height: 82px;
-      margin: auto;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.25);
-
-      font-size: 25px;
-      font-weight: bold;
-
-      backdrop-filter: blur(10px);
-    }
-
-    h1 {
-      margin-top: 16px;
-      font-size: 34px;
-      letter-spacing: -1px;
-    }
-
-    .username {
-      color: #aaa;
-      margin-top: 6px;
-      font-size: 14px;
-    }
-
-    .bio {
-      margin-top: 15px;
-      color: #ccc;
-      font-size: 14px;
-    }
-
-    /* Social buttons */
-    .links {
-      margin-top: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-    }
-
-    .link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 17px 20px;
-
-      text-decoration: none;
-      color: white;
-
-      background: rgba(15,15,15,0.72);
-      border: 1px solid rgba(255,255,255,0.13);
-
-      border-radius: 17px;
-
-      backdrop-filter: blur(15px);
-
-      transition: 0.25s;
-    }
-
-    .link:hover {
-      transform: translateY(-3px);
-      background: rgba(255,255,255,0.09);
-      border-color: rgba(255,255,255,0.3);
-    }
-
-    .link-left {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-    }
-
-    .icon {
-      font-size: 22px;
-    }
-
-    .link-title {
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .arrow {
-      color: #888;
-      font-size: 18px;
-    }
-
-    /* Contact */
-    .contact {
-      margin-top: 60px;
-
-      padding: 25px;
-
-      background: rgba(10,10,10,0.78);
-      border: 1px solid rgba(255,255,255,0.13);
-
-      border-radius: 24px;
-
-      backdrop-filter: blur(18px);
-    }
-
-    .contact-small {
-      color: #888;
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-
-    .contact h2 {
-      margin-top: 7px;
-      font-size: 27px;
-    }
-
-    .contact-description {
-      color: #999;
-      font-size: 13px;
-      line-height: 1.5;
-      margin-top: 8px;
-    }
-
-    form {
-      margin-top: 23px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    label {
-      color: #ccc;
-      font-size: 13px;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-
-      margin-top: 7px;
-
-      padding: 14px;
-
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 13px;
-
-      outline: none;
-
-      background: rgba(255,255,255,0.045);
-      color: white;
-
-      font-size: 14px;
-      font-family: Arial, sans-serif;
-    }
-
-    input::placeholder,
-    textarea::placeholder {
-      color: #666;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: rgba(255,255,255,0.4);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    button {
-      border: none;
-
-      padding: 15px;
-
-      border-radius: 13px;
-
-      background: white;
-      color: black;
-
-      font-size: 14px;
-      font-weight: bold;
-
-      cursor: pointer;
-
-      transition: 0.2s;
-    }
-
-    button:hover {
-      transform: translateY(-2px);
-      opacity: 0.9;
-    }
-
-    footer {
-      text-align: center;
-      color: #555;
-      font-size: 11px;
-      margin-top: 35px;
-    }
-
-    @media (max-width: 500px) {
-      .container {
-        padding-top: 50px;
-      }
-
-      h1 {
-        font-size: 30px;
-      }
-    }
-  </style>
+</style>
 </head>
+
 
 <body>
 
-  <div class="page">
 
-    <!-- Your uploaded photo -->
-    <div class="background">
-      <img src="hero.jpg" alt="Zaid Jr">
-    </div>
+<!-- BACKGROUND -->
 
-    <div class="container">
+<div class="background">
 
-      <!-- PROFILE -->
-      <section class="profile">
+    <img
+        src="hero.jpg"
+        alt="Zaid Jr"
+    >
 
-        <div class="avatar">
-          ZJ
-        </div>
-
-        <h1>Zaid Jr</h1>
-
-        <p class="username">
-          @syed.5.7
-        </p>
-
-        <p class="bio">
-          Welcome to my corner of the internet.
-        </p>
-
-      </section>
+</div>
 
 
-      <!-- SOCIAL LINKS -->
-      <section class="links">
-
-        <a
-          class="link"
-          href="https://www.instagram.com/syed.5.7?exln=MTM0YTM0d3NyMzZkaA%3D%3D"
-          target="_blank"
-        >
-
-          <div class="link-left">
-            <span class="icon">◎</span>
-
-            <span class="link-title">
-              Instagram
-            </span>
-          </div>
-
-          <span class="arrow">
-            ↗
-          </span>
-
-        </a>
+<div class="glow"></div>
 
 
-        <a
-          class="link"
-          href="https://www.snapchat.com/add/sy3d_zaid?share_id=HTM9MwyW8WU&locale=en-IN"
-          target="_blank"
-        >
+<!-- PARTICLES -->
 
-          <div class="link-left">
-            <span class="icon">👻</span>
+<div class="particles">
 
-            <span class="link-title">
-              Snapchat
-            </span>
-          </div>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
 
-          <span class="arrow">
-            ↗
-          </span>
-
-        </a>
-
-      </section>
+</div>
 
 
-      <!-- CONTACT FORM -->
-      <section class="contact">
 
-        <span class="contact-small">
-          GET IN TOUCH
-        </span>
-
-        <h2>
-          Send me a message
-        </h2>
-
-        <p class="contact-description">
-          Enter your name and email, then send me your message.
-        </p>
+<div class="container">
 
 
-        <!--
-          IMPORTANT:
-          Replace YOUR_FORMSPREE_ENDPOINT with your
-          Formspree endpoint.
-        -->
+<!-- ================= HERO ================= -->
 
-        <form
-          action="YOUR_FORMSPREE_ENDPOINT"
-          method="POST"
-        >
+<section class="hero">
 
-          <label>
-            Name
-
-            <input
-              type="text"
-              name="name"
-              placeholder="Your name"
-              required
-            >
-
-          </label>
+<div class="hero-content">
 
 
-          <label>
-            Email
-
-            <input
-              type="email"
-              name="email"
-              placeholder="you@example.com"
-              required
-            >
-
-          </label>
+<div class="profile-image">
+    ZJ
+</div>
 
 
-          <label>
-            Message
-
-            <textarea
-              name="message"
-              placeholder="Write your message..."
-              required
-            ></textarea>
-
-          </label>
+<h1>
+    Zaid Jr
+</h1>
 
 
-          <button type="submit">
-            Send Message →
-          </button>
-
-        </form>
-
-      </section>
+<p class="username">
+    @syed.5.7
+</p>
 
 
-      <footer>
-        © 2026 Zaid Jr
-      </footer>
+<p class="tagline">
 
-    </div>
-  </div>
+    Just a guy exploring life,
+    creating memories and enjoying
+    the little things along the way.
+
+</p>
+
+
+
+<div class="buttons">
+
+
+<a
+class="button"
+href="https://www.instagram.com/syed.5.7?exln=MTM0YTM0d3NyMzZkaA%3D%3D"
+target="_blank"
+>
+
+<div class="button-left">
+
+<div class="button-icon">
+    ◎
+</div>
+
+<div class="button-name">
+    Instagram
+</div>
+
+</div>
+
+<div class="button-arrow">
+    ↗
+</div>
+
+</a>
+
+
+
+<a
+class="button"
+href="https://www.snapchat.com/add/sy3d_zaid?share_id=HTM9MwyW8WU&locale=en-IN"
+target="_blank"
+>
+
+<div class="button-left">
+
+<div class="button-icon">
+    👻
+</div>
+
+<div class="button-name">
+    Snapchat
+</div>
+
+</div>
+
+<div class="button-arrow">
+    ↗
+</div>
+
+</a>
+
+
+</div>
+
+
+<div class="scroll">
+    SCROLL ↓
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="info">
+
+<span class="section-label">
+    ABOUT ME
+</span>
+
+
+<h2 class="section-title">
+    A little about me.
+</h2>
+
+
+<div class="about-card">
+
+    <p>
+
+    Hey, I'm <strong>Zaid</strong>.
+
+    Welcome to my little space on the internet.
+
+    I'm someone who likes keeping things simple,
+    discovering new places, listening to music,
+    making memories and enjoying life one day
+    at a time.
+
+    <br><br>
+
+    This page is basically my small corner where
+    you can find my socials and get in touch with me.
+
+    </p>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= VIBE ================= -->
+
+<section class="info">
+
+<span class="section-label">
+    MY VIBE
+</span>
+
+
+<h2 class="section-title">
+    Things I enjoy.
+</h2>
+
+
+<div class="interests">
+
+
+<div class="interest">
+
+<div class="interest-icon">
+    🎧
+</div>
+
+<h3>
+    Music
+</h3>
+
+<p>
+    Late night playlists.
+</p>
+
+</div>
+
+
+
+<div class="interest">
+
+<div class="interest-icon">
+    🌲
+</div>
+
+<h3>
+    Nature
+</h3>
+
+<p>
+    Quiet places & views.
+</p>
+
+</div>
+
+
+
+<div class="interest">
+
+<div class="interest-icon">
+    📸
+</div>
+
+<h3>
+    Memories
+</h3>
+
+<p>
+    Capturing moments.
+</p>
+
+</div>
+
+
+
+<div class="interest">
+
+<div class="interest-icon">
+    🌙
+</div>
+
+<h3>
+    Night Vibes
+</h3>
+
+<p>
+    Peace & late nights.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="info">
+
+<span class="section-label">
+    CONTACT
+</span>
+
+
+<h2 class="section-title">
+    Let's talk.
+</h2>
+
+
+<div class="contact">
+
+<p class="contact-description">
+
+Want to send me something?
+
+Enter your name, email and message below.
+
+</p>
+
+
+
+<form
+action="YOUR_FORMSPREE_ENDPOINT"
+method="POST"
+>
+
+
+<label>
+
+Name
+
+<input
+type="text"
+name="name"
+placeholder="Your name"
+required
+>
+
+</label>
+
+
+
+<label>
+
+Email
+
+<input
+type="email"
+name="email"
+placeholder="you@example.com"
+required
+>
+
+</label>
+
+
+
+<label>
+
+Message
+
+<textarea
+name="message"
+placeholder="Write your message..."
+required
+></textarea>
+
+</label>
+
+
+
+<button
+class="send"
+type="submit"
+>
+
+Send Message →
+
+</button>
+
+
+</form>
+
+</div>
+
+</section>
+
+
+
+<footer>
+
+© 2026 Zaid Jr • Made with 🖤
+
+</footer>
+
+
+</div>
 
 </body>
 </html>
